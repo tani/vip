@@ -1,0 +1,74 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# This workflow will install Deno then run Deno lint and test.
+# For more information see: https://github.com/denoland/setup-deno
+
+name: Deno
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Build
+        run: deno run --allow-run ./build.ts
+      - name: Deploy Nightly (Linux)
+        uses: WebFreak001/deploy-nightly@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/tani/vip/releases/58900647/assets{?name,label}
+          release_id: 58900647
+          asset_path: dist/vip-x86_64-unknown-linux-gnu.zip
+          asset_name: vip-x86_64-unknown-linux-gnu-$$.zip
+          asset_content_type: application/zip
+          max_releases: 7
+      - name: Deploy Nightly (Windows)
+        uses: WebFreak001/deploy-nightly@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/tani/vip/releases/58900647/assets{?name,label}
+          release_id: 58900647
+          asset_path: dist/vip-x86_64-pc-windows-msvc.zip
+          asset_name: vip-x86_64-pc-windows-msvc-$$.zip
+          asset_content_type: application/zip
+          max_releases: 7
+      - name: Deploy Nightly (macOS)
+        uses: WebFreak001/deploy-nightly@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/tani/vip/releases/58900647/assets{?name,label}
+          release_id: 58900647
+          asset_path: dist/vip-x86_64-apple-darwin.zip
+          asset_name: vip-x86_64-apple-darwin-$$.zip
+          asset_content_type: application/zip
+          max_releases: 7
+      - name: Deploy Nightly (macOS aarch64)
+        uses: WebFreak001/deploy-nightly@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: https://uploads.github.com/repos/tani/vip/releases/58900647/assets{?name,label}
+          release_id: 58900647
+          asset_path: dist/vip-aarch64-apple-darwin.zip
+          asset_name: vip-aarch64-apple-darwin-$$.zip
+          asset_content_type: application/zip
+          max_releases: 7
