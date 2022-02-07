@@ -65,7 +65,8 @@ Every installation and deletion are synchronized with
     "name": "michaelb/do-nothing.vim",
     "protocol": "https",
     "type": "start",
-    "branch": "master"
+    "branch": "master",
+    "dependencies" []
   }]
 }
 ```
