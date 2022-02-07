@@ -73,7 +73,7 @@ Every installation and deletion are synchronized with
 ### Add new package
 
 ```
-vip add michaelb/do-nothing.vim
+vip add michaelb/do-nothing.vim [extra dependencies ...]
 ```
 
 `--protocl / -p` option sets the protocol to clone the repository.
