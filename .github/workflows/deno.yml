@@ -38,7 +38,7 @@ jobs:
           asset_path: dist/vip-x86_64-unknown-linux-gnu.zip
           asset_name: vip-x86_64-unknown-linux-gnu-$$.zip
           asset_content_type: application/zip
-          max_releases: 7
+          max_releases: 1
       - name: Deploy Nightly (Windows)
         uses: WebFreak001/deploy-nightly@v1.1.0
         env:
@@ -49,7 +49,7 @@ jobs:
           asset_path: dist/vip-x86_64-pc-windows-msvc.zip
           asset_name: vip-x86_64-pc-windows-msvc-$$.zip
           asset_content_type: application/zip
-          max_releases: 7
+          max_releases: 1
       - name: Deploy Nightly (macOS)
         uses: WebFreak001/deploy-nightly@v1.1.0
         env:
@@ -60,7 +60,7 @@ jobs:
           asset_path: dist/vip-x86_64-apple-darwin.zip
           asset_name: vip-x86_64-apple-darwin-$$.zip
           asset_content_type: application/zip
-          max_releases: 7
+          max_releases: 1
       - name: Deploy Nightly (macOS aarch64)
         uses: WebFreak001/deploy-nightly@v1.1.0
         env:
@@ -71,4 +71,4 @@ jobs:
           asset_path: dist/vip-aarch64-apple-darwin.zip
           asset_name: vip-aarch64-apple-darwin-$$.zip
           asset_content_type: application/zip
-          max_releases: 7
+          max_releases: 1
