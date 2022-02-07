@@ -51,7 +51,7 @@ Now, we are ready to use Vim.
 3. Add your favorite plugin `vip add michaelb/do-nothing.vim`
 4. Run `vip vim ...` / `vip nvim ...`
 
-The last command is equaivalent to `vim -u NONE --cmd='set packpath^=/path/to/.vip | packloadall' ...`.
+The last command is equaivalent to `vim -N -u NONE --cmd='set packpath^=/path/to/.vip | packloadall' ...`.
 
 ## Usage
 
