@@ -5,7 +5,7 @@ This software is still ALPHA quality. The APIs will be likely to change.
 ## Installation
 
 Please the prebuilt binary download
-from [releases](https://github.com/tani/vip/releases).
+from [releases](https://github.com/tani/vip/releases/tag/nightly).
 
 **This binary does no require the installtion of Deno.**
 
