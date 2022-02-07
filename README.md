@@ -66,7 +66,7 @@ Every installation and deletion are synchronized with
     "protocol": "https",
     "type": "start",
     "branch": "master",
-    "dependencies" []
+    "dependencies": []
   }]
 }
 ```
