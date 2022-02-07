@@ -186,6 +186,7 @@ async function remove(name: string): Promise<void> {
 
 async function edit(vi: string) {
   const cmd = [vi];
+  cmd.push("-N");
   cmd.push("-u", "NONE");
   cmd.push("--cmd", `set packpath^=${await configDir()} | packloadall`);
   cmd.push(...Deno.args.slice(1));
@@ -205,7 +206,7 @@ async function main() {
   await fs.ensureDir(path.join(await packpath(), "opt"));
 
   if (args._.at(0) === "vim") {
-    await edit("vi");
+    await edit("vim");
   }
 
   if (args._.at(0) === "nvim") {
