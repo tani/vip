@@ -1,5 +1,12 @@
 # VIP: VIm Package manager
 
+    ██╗░░░██╗██╗██████╗░
+    ██║░░░██║██║██╔══██╗
+    ╚██╗░██╔╝██║██████╔╝
+    ░╚████╔╝░██║██╔═══╝░
+    ░░╚██╔╝░░██║██║░░░░░
+    ░░░╚═╝░░░╚═╝╚═╝░░░░░
+
 This software is still ALPHA quality. The APIs will be likely to change.
 
 ## Installation
