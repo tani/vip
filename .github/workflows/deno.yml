@@ -31,7 +31,7 @@ jobs:
       - name: Deploy Nightly (Linux)
         uses: WebFreak001/deploy-nightly@v1.1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: https://uploads.github.com/repos/tani/vip/releases/58900647/assets{?name,label}
           release_id: 58900647
@@ -42,7 +42,7 @@ jobs:
       - name: Deploy Nightly (Windows)
         uses: WebFreak001/deploy-nightly@v1.1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: https://uploads.github.com/repos/tani/vip/releases/58900647/assets{?name,label}
           release_id: 58900647
@@ -53,7 +53,7 @@ jobs:
       - name: Deploy Nightly (macOS)
         uses: WebFreak001/deploy-nightly@v1.1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: https://uploads.github.com/repos/tani/vip/releases/58900647/assets{?name,label}
           release_id: 58900647
@@ -64,7 +64,7 @@ jobs:
       - name: Deploy Nightly (macOS aarch64)
         uses: WebFreak001/deploy-nightly@v1.1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: https://uploads.github.com/repos/tani/vip/releases/58900647/assets{?name,label}
           release_id: 58900647
