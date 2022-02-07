@@ -18,11 +18,13 @@ from [releases](https://github.com/tani/vip/releases/tag/nightly).
 
 For the developers, you can install the nightly version using Deno.
 
+Install:
 ```
-# Install
 deno install --allow-env --allow-net --allow-read --allow-write --allow-run --name vip https://raw.githubusercontent.com/tani/vip/master/vip.ts
+```
 
-# Update
+Update:
+```
 deno cache --reload  https://raw.githubusercontent.com/tani/vip/master/vip.ts
 ```
 
