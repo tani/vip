@@ -184,6 +184,14 @@ async function remove(name: string): Promise<void> {
   await Deno.writeTextFile(settingsPath, JSON.stringify(settings, null, 2));
 }
 
+async function edit(vi: string) {
+  const cmd = [vi];
+  cmd.push("-u", "NONE");
+  cmd.push("--cmd", `set packpath^=${await configDir()} | packloadall`);
+  cmd.push(...Deno.args.slice(1));
+  await Deno.run({ cmd }).status();
+}
+
 async function main() {
   const args = parse(Deno.args, {
     alias: {
@@ -195,6 +203,14 @@ async function main() {
 
   await fs.ensureDir(path.join(await packpath(), "start"));
   await fs.ensureDir(path.join(await packpath(), "opt"));
+
+  if (args._.at(0) === "vim") {
+    await edit("vi");
+  }
+
+  if (args._.at(0) === "nvim") {
+    await edit("nvim");
+  }
 
   if (args._.at(0) === "sync") {
     await sync();

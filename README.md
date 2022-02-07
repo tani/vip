@@ -38,10 +38,14 @@ vip add michaelb/do-nothing.vim
 
 Now, we are ready to use Vim.
 
-**Tips:** VIP searches the closest `.vip` directory, _i.e._,
-you can avoid the gloval installation if you run `mkdir .vip`
-and write `exe 'set packpath^=' .. expand('.vip') | packloadall`
-in the current working direcotry.
+## Create Sandbox
+
+1. Move a working directory  `mkdir /tmp/work && cd /tmp/work`
+2. Create `.vip` directory `mkdir .vip`
+3. Add your favorite plugin `vip add michaelb/do-nothing.vim`
+4. Run `vip vim ...` / `vip nvim ...`
+
+The last command is equaivalent to `vim -u NONE --cmd='set packpath^=/path/to/.vip | packloadall' ...`.
 
 ## Usage
 
