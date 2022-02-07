@@ -5,17 +5,30 @@ const targets = [
   "aarch64-apple-darwin",
 ];
 
-await Promise.all(targets.map((target) => {
-  const p = Deno.run({
+await Promise.all(targets.map(async (target) => {
+  await Deno.run({
     cmd: [
       "deno",
       "compile",
+      "--allow-run",
+      "--allow-net",
+      "--allow-env",
+      "--allow-write",
+      "--allow-read",
       "--target",
       target,
       "--output",
-      `dist/vip-${target}`,
+      `dist/vip-${target}/vip`,
       "vip.ts",
     ],
-  });
-  return p.status();
+  }).status();
+  await Deno.run({
+    cmd: [
+      "zip",
+      "-r",
+      "-j",
+      `dist/vip-${target}.zip`,
+      `dist/vip-${target}`,
+    ],
+  }).status();
 }));
