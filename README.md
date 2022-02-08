@@ -94,6 +94,19 @@ vip sync
 vip log
 ```
 
+## Bootstrap Vim Interface (Optional)
+
+You need to instal denops `vip add tani/vip vim-denops/denops.vim`
+
+- `:VipAdd michaelb/do-nothing.vim` to add package
+- `:VipAddOpt michaelb/do-nothing.vim` to add opt-pacakge
+- `:VipRemove michaelb/do-nothing.vim` to remove pacakge
+- `:VipRemoveOpt michaelb/do-nothing.vim` to remove opt-package
+- `:VipList` to show all package
+- `:VipListOpt` to show all opt-package
+- `:VipSync` to update and synchronize packages
+- `:VipLog` to show history of packages
+
 ## Copyright and License
 
 Copyright (c) 2022 TANIGUCHI Masaya. All rights reserved.
