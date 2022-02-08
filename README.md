@@ -44,31 +44,7 @@ vip add michaelb/do-nothing.vim
 
 Now, we are ready to use Vim.
 
-## Create Sandbox
-
-1. Move a working directory  `mkdir /tmp/work && cd /tmp/work`
-2. Create `.vip` directory `mkdir .vip`
-3. Add your favorite plugin `vip add michaelb/do-nothing.vim`
-4. Run `vip vim ...` / `vip nvim ...`
-
-The last command is equaivalent to `vim -u NONE --cmd='set packpath^=/path/to/.vip | packloadall' ...`.
-
 ## Usage
-
-Every installation and deletion are synchronized with
-`~/.vip/settings.json` as follows.
-
-```json
-{
-  "version": "0",
-  "packages": [{
-    "name": "michaelb/do-nothing.vim",
-    "protocol": "https",
-    "type": "start",
-    "branch": "master"
-  }]
-}
-```
 
 ### Add new package
 
@@ -76,25 +52,11 @@ Every installation and deletion are synchronized with
 vip add michaelb/do-nothing.vim
 ```
 
-`--protocl / -p` option sets the protocol to clone the repository.
-
-```
-vip add --protocol ssh michaelb/do-nothing.vim
-vip add -p ssh michaelb/do-nothing.vim
-```
-
 `--type / -t` option sets the type of the plugin whether `opt` or `start`.
 
 ```
 vip add --type opt michaelb/do-nothing.vim
 vip add -t opt michaelb/do-nothing.vim
-```
-
-`--branch / -b` option sets the branch of repository.
-
-```
-vip add --branch master michaelb/do-nothing.vim
-vip add -b master michaelb/do-nothing.vim
 ```
 
 ### Remove package
