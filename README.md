@@ -128,6 +128,7 @@ You need to instal denops `vip add tani/vip vim-denops/denops.vim`
 - `:VipListOpt` to show all opt-package
 - `:VipSync` to update and synchronize packages
 - `:VipLog` to show history of packages
+- `:VipBundle` to bundle whole packages
 
 ## Copyright and License
 

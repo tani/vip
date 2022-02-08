@@ -73,6 +73,7 @@ vip list [--opt]
 vip sync
 vip log
 vip upgrade
+vip bundle
 `);
 }
 
