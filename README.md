@@ -96,6 +96,8 @@ vip log
 
 ### Upgrade VIP
 
+**NOTE** This subcommand is not for the binary distribution.
+
 ```
 vip upgrade
 ```
