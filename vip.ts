@@ -25,6 +25,9 @@ switch (args._.at(0)) {
   case "sync":
     await vip.sync();
     break;
+  case "bundle":
+    await vip.bundle();
+    break;
   case "upgrade":
     await Deno.run({
       cmd: [

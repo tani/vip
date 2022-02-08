@@ -33,7 +33,7 @@ deno cache --reload  https://raw.githubusercontent.com/tani/vip/master/vip.ts
 Add the package path in `~/.vimrc` or `~/.config/nvim/init.vim`.
 
 ```vim
-exe 'set packpath^=' .. expand('~/.vip') | packloadall
+exe 'set packpath^=' .. expand('~/.vip/src') | packloadall
 ```
 
 Run `add` subcommand to install a package.
@@ -92,6 +92,20 @@ vip sync
 
 ```
 vip log
+```
+
+### Aggressive optimization
+
+This command merges all runtime paths into one.
+Not that it may break some packages.
+
+```
+vip bundle # you need to install `rsync`
+```
+
+You can load optimized packags as follows.
+```vim
+exe 'set packpath^=' .. expand('~/.vip/bundle') | packloadall
 ```
 
 ### Upgrade VIP
