@@ -1,13 +1,11 @@
 import * as fs from "https://lib.deno.dev/std/fs/mod.ts";
 import * as path from "https://lib.deno.dev/std/path/mod.ts";
-import { parse } from "https://lib.deno.dev/std/flags/mod.ts";
+import * as flags  from "https://lib.deno.dev/std/flags/mod.ts";
+import ini from "https://esm.sh/js-ini@1";
 
-const args = parse(Deno.args, {
-  alias: { type: "t" },
-  default: { type: "start" },
-});
+const args = flags.parse(Deno.args);
 
-const type: "start" | "opt" = args.type;
+const type: "start" | "opt" = args.opt ? "opt" : "start";
 const homedir = Deno.env.get("HOME")!;
 const vipdir = path.join(homedir, ".vip");
 const startdir = path.join(vipdir, "pack/vip/start");
@@ -42,14 +40,27 @@ async function remove(name: string) {
   await Deno.remove(submoddir);
 }
 
+async function list() {
+  const gitmodulesPath = path.join(vipdir, ".gitmodules");
+  const gitmodulesStr = await Deno.readTextFile(gitmodulesPath);
+  const gitmodules = ini.parse(gitmodulesStr)
+  for(const module of Object.values(gitmodules) as any) {
+    if(module.path.includes(path.relative(vipdir, packdir[type]))) {
+      const url = new URL(module.url)
+      console.log(path.relative('/',url.pathname))
+    }
+  }
+}
+
 async function sync() {
   await git("submodule", "update", "--init", "--recursive");
 }
 
 function help() {
   console.log(`
-vip add [--type (start|opt)] username/reponame ...
-vip remove [--type (start|opt)] [username/]reponame ...
+vip add [--opt] username/reponame ...
+vip remove [--opt] [username/]reponame ...
+vip list [--opt]
 vip sync
 `);
 }
@@ -76,6 +87,9 @@ switch (args._.at(0)) {
     break;
   case "sync":
     await sync();
+    break;
+  case "list":
+    await list();
     break;
   default:
     help();

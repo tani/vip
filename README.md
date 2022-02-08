@@ -52,11 +52,10 @@ Now, we are ready to use Vim.
 vip add michaelb/do-nothing.vim ...
 ```
 
-`--type / -t` option sets the type of the plugin whether `opt` or `start`.
+`--opt` option sets the type of the plugin `opt`
 
 ```
-vip add --type opt michaelb/do-nothing.vim
-vip add -t opt michaelb/do-nothing.vim
+vip add --opt michaelb/do-nothing.vim
 ```
 
 ### Remove package
@@ -65,11 +64,22 @@ vip add -t opt michaelb/do-nothing.vim
 vip remove do-nothing.vim ...
 ```
 
-`--type / -t` option sets the type of the plugin whether `opt` or `start`.
+`--opt` option sets the type of the plugin `opt`
 
 ```
-vip remove --type opt do-nothing.vim
-vip remove -t opt do-nothing.vim
+vip remove --opt do-nothing.vim
+```
+
+### Show packages
+
+```
+vip list
+```
+
+`--opt` option sets the type of the plugin `opt`
+
+```
+vip list --opt
 ```
 
 ### Update and synchronize packages
