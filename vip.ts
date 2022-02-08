@@ -19,6 +19,9 @@ switch (args._.at(0)) {
   case "list":
     await vip.list(type);
     break;
+  case "log":
+    await vip.log();
+    break;
   case "sync":
     await vip.sync();
     break;

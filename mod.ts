@@ -55,12 +55,17 @@ export async function sync() {
   await git("submodule", "update", "--init", "--recursive");
 }
 
+export async function log() {
+  await git("log")
+}
+
 export function help() {
   console.log(`
 vip add [--opt] username/reponame ...
 vip remove [--opt] [username/]reponame ...
 vip list [--opt]
 vip sync
+vip log  
 `);
 }
 

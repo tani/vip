@@ -88,6 +88,12 @@ vip list --opt
 vip sync
 ```
 
+### Show history of packages
+
+```
+vip log
+```
+
 ## Copyright and License
 
 Copyright (c) 2022 TANIGUCHI Masaya. All rights reserved.
