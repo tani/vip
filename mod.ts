@@ -58,6 +58,7 @@ export async function list(type: Type) {
 
 export async function sync() {
   await git("submodule", "update", "--init", "--recursive");
+  await git("submodule", "foreach", "git", "pull", "origin");
   await git("commit", "-am", "Update submodules");
 }
 
