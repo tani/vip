@@ -7,10 +7,14 @@ const type: vip.Type = args.opt ? "opt" : "start";
 const packages = args._.slice(1) as string[];
 switch (args._.at(0)) {
   case "add":
-    await Promise.all(packages.map((pkg) => vip.add(type, pkg)));
+    for(const pkg in pacakges) {
+      await vip.add(type, pkg);
+    }
     break;
   case "remove":
-    await Promise.all(packages.map((pkg) => vip.remove(type, pkg)));
+    for(const pkg in pacakges) {
+      await vip.remove(type, pkg);
+    }
     break;
   case "list":
     await vip.list(type);
