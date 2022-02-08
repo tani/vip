@@ -49,7 +49,7 @@ Now, we are ready to use Vim.
 ### Add new package
 
 ```
-vip add michaelb/do-nothing.vim
+vip add michaelb/do-nothing.vim [extra dependencies ...]
 ```
 
 `--type / -t` option sets the type of the plugin whether `opt` or `start`.
