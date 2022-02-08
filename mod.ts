@@ -25,6 +25,7 @@ export async function add(type: Type, name: string) {
   const url = `https://github.com/${username}/${reponame}`;
   const reldir = path.relative(vipdir, path.join(packdir[type], reponame));
   await git("submodule", "add", url, reldir);
+  await git("commit", "-am", `Add ${name}`)
 }
 
 export async function remove(type: Type, name: string) {
@@ -35,6 +36,7 @@ export async function remove(type: Type, name: string) {
   const submoddir = path.join(moddir, reldir);
   await fs.emptyDir(submoddir);
   await Deno.remove(submoddir);
+  await git("commit", "-am", `Remove ${name}`)
 }
 
 export async function list(type: Type) {
