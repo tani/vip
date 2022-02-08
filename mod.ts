@@ -2,7 +2,7 @@ import * as fs from "https://lib.deno.dev/std/fs/mod.ts";
 import * as path from "https://lib.deno.dev/std/path/mod.ts";
 import ini from "https://esm.sh/js-ini@1";
 
-export type Type = "start" | "opt"
+export type Type = "start" | "opt";
 const homedir = Deno.env.get("HOME")!;
 const vipdir = path.join(homedir, ".vip");
 const startdir = path.join(vipdir, "pack/vip/start");
@@ -25,7 +25,7 @@ export async function add(type: Type, name: string) {
   const url = `https://github.com/${username}/${reponame}`;
   const reldir = path.relative(vipdir, path.join(packdir[type], reponame));
   await git("submodule", "add", url, reldir);
-  await git("commit", "-am", `Add ${name}`)
+  await git("commit", "-am", `Add ${name}`);
 }
 
 export async function remove(type: Type, name: string) {
@@ -36,28 +36,28 @@ export async function remove(type: Type, name: string) {
   const submoddir = path.join(moddir, reldir);
   await fs.emptyDir(submoddir);
   await Deno.remove(submoddir);
-  await git("commit", "-am", `Remove ${name}`)
+  await git("commit", "-am", `Remove ${name}`);
 }
 
 export async function list(type: Type) {
   const gitmodulesPath = path.join(vipdir, ".gitmodules");
   const gitmodulesStr = await Deno.readTextFile(gitmodulesPath);
-  const gitmodules = ini.parse(gitmodulesStr)
-  for(const module of Object.values(gitmodules) as any) {
-    if(module.path.includes(path.relative(vipdir, packdir[type]))) {
-      const url = new URL(module.url)
-      console.log(path.relative('/',url.pathname))
+  const gitmodules = ini.parse(gitmodulesStr);
+  for (const module of Object.values(gitmodules) as any) {
+    if (module.path.includes(path.relative(vipdir, packdir[type]))) {
+      const url = new URL(module.url);
+      console.log(path.relative("/", url.pathname));
     }
   }
 }
 
 export async function sync() {
   await git("submodule", "update", "--init", "--recursive");
-  await git("commit", "-am", 'Update submodules')
+  await git("commit", "-am", "Update submodules");
 }
 
 export async function log() {
-  await git("log")
+  await git("log");
 }
 
 export function help() {
@@ -66,7 +66,8 @@ vip add [--opt] username/reponame ...
 vip remove [--opt] [username/]reponame ...
 vip list [--opt]
 vip sync
-vip log  
+vip log
+vip upgrade
 `);
 }
 
@@ -83,4 +84,3 @@ export async function init() {
     git("init");
   }
 }
-

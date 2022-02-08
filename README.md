@@ -94,6 +94,12 @@ vip sync
 vip log
 ```
 
+### Upgrade VIP
+
+```
+vip upgrade
+```
+
 ## Bootstrap Vim Interface (Optional)
 
 You need to instal denops `vip add tani/vip vim-denops/denops.vim`
