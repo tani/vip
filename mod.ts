@@ -154,22 +154,22 @@ function ignorable(file: string) {
 export async function bundle() {
   const src_dirs = await listAbsDirs(src_startdir);
   const dest_dir = path.join(bundle_startdir, "bundle");
-  const tbl: Record<string, string> = {};
+  const tbl = new Map<string, string>();
   let conflicted = false;
   for (const src_dir of src_dirs) {
     for (const src_file of await listAbsFiles(src_dir, true)) {
       const dest_file = src_file.replace(src_dir, dest_dir);
-      if (dest_file in tbl && !ignorable(src_file)) {
-        console.error("conflicted", src_file, tbl[dest_file]);
+      if (tbl.has(dest_file) && !ignorable(src_file)) {
+        console.error("conflicted", src_file, tbl.get(dest_file));
         conflicted = true;
       } else {
-        tbl[dest_file] = src_file;
+        tbl.set(dest_file, src_file);
       }
     }
   }
   if (conflicted) Deno.exit(1);
   await fs.emptyDir(path.join(bundle_startdir, "bundle"));
-  for (const [dest_file, src_file] of Object.entries(tbl)) {
+  for (const [dest_file, src_file] of tbl) {
     await fs.ensureDir(path.dirname(dest_file));
     await Deno.copyFile(src_file, dest_file);
   }
