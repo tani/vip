@@ -1,6 +1,5 @@
 import * as fs from "https://lib.deno.dev/std/fs/mod.ts";
 import * as path from "https://lib.deno.dev/std/path/mod.ts";
-import * as R from "https://esm.sh/rambda";
 import ini from "https://esm.sh/js-ini@1";
 
 const ignores = [
@@ -41,8 +40,8 @@ const src_startdir = path.join(vipdir, "src", "pack/vip/start");
 const src_optdir = path.join(vipdir, "src", "pack/vip/opt");
 const src_packdir = { start: src_startdir, opt: src_optdir };
 
-const bundle_startdir = path.join(vipdir, "bundle", "pack/vip/start");
-const bundle_optdir = path.join(vipdir, "bundle", "pack/vip/opt");
+const bundle_startdir = path.join(vipdir, "pack/vip/start");
+const bundle_optdir = path.join(vipdir, "pack/vip/opt");
 
 const moddir = path.join(vipdir, ".git/modules");
 
@@ -146,45 +145,33 @@ vip bundle
 `);
 }
 
+function ignorable(file: string) {
+  return ignores
+    .map((p) => path.globToRegExp("**/" + p, {}))
+    .some((m) => file.match(m));
+}
+
 export async function bundle() {
-  const dirs = await listAbsDirs(src_startdir);
-  const lists = await Promise.all(
-    dirs.map(async (dir) => ({
-      dir,
-      files: await listRelFiles(dir, true),
-    })),
-  );
+  const src_dirs = await listAbsDirs(src_startdir);
+  const dest_dir = path.join(bundle_startdir, "bundle");
+  const tbl: Record<string, string> = {};
   let conflicted = false;
-  for (const list1 of lists) {
-    for (const list2 of lists) {
-      if (list1 === list2) continue;
-      const conflicts = R
-        .intersection(list1.files, list2.files)
-        .filter((file) =>
-          !ignores
-            .map((p) => path.globToRegExp(p, {}))
-            .some((m) => file.match(m))
-        );
-      if (conflicts.length !== 0) {
-        const from = path.basename(list1.dir);
-        const to = path.basename(list2.dir);
-        console.error(
-          `The following files are conflicted between ${from} and ${to}.`,
-        );
-        conflicts.forEach((c) => console.error(c));
+  for (const src_dir of src_dirs) {
+    for (const src_file of await listAbsFiles(src_dir, true)) {
+      const dest_file = src_file.replace(src_dir, dest_dir);
+      if (dest_file in tbl && !ignorable(src_file)) {
+        console.error("conflicted", src_file, tbl[dest_file]);
         conflicted = true;
+      } else {
+        tbl[dest_file] = src_file;
       }
     }
   }
   if (conflicted) Deno.exit(1);
   await fs.emptyDir(path.join(bundle_startdir, "bundle"));
-  for (const list of lists) {
-    for (const file of list.files) {
-      const from = path.join(list.dir, file);
-      const to = path.join(path.join(bundle_startdir, "bundle"), file);
-      await fs.ensureDir(path.dirname(to));
-      await Deno.copyFile(from, to);
-    }
+  for (const [dest_file, src_file] of Object.entries(tbl)) {
+    await fs.ensureDir(path.dirname(dest_file));
+    await Deno.copyFile(src_file, dest_file);
   }
   await fs.emptyDir(bundle_optdir);
   await Deno.remove(bundle_optdir);
