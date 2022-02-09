@@ -24,12 +24,6 @@ Install:
 deno install --allow-env --allow-net --allow-read --allow-write --allow-run --name vip https://raw.githubusercontent.com/tani/vip/master/vip.ts
 ```
 
-Update:
-
-```
-deno cache --reload  https://raw.githubusercontent.com/tani/vip/master/vip.ts
-```
-
 ## Quickstart
 
 Add the package path in `~/.vimrc` or `~/.config/nvim/init.vim`.
