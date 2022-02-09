@@ -100,7 +100,7 @@ This command merges all runtime paths into one.
 Not that it may break some packages.
 
 ```
-vip bundle # you need to install `rsync`
+vip bundle
 ```
 
 You can load optimized packags as follows.
